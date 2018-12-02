@@ -1,0 +1,29 @@
+{
+  "name": "got-integrity",
+  "version": "1.0.0",
+  "description": "fetch web resources with some integrity checking",
+  "main": "index.js",
+  "bin": "command.js",
+  "scripts": {
+    "test": "tap --cov test*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sandhawke/got-integrity.git"
+  },
+  "author": "Sandro Hawke (http://hawke.org/sandro)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sandhawke/got-integrity/issues"
+  },
+  "homepage": "https://github.com/sandhawke/got-integrity#readme",
+  "dependencies": {
+    "got": "^9.3.2",
+    "meow": "^5.0.0",
+    "ssri": "^6.0.1"
+  },
+  "devDependencies": {
+    "tap": "^12.1.0",
+    "tape": "^4.9.1"
+  }
+}
