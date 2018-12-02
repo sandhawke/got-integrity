@@ -1,7 +1,7 @@
 {
   "name": "got-integrity",
   "version": "1.0.0",
-  "description": "fetch web resources with some integrity checking",
+  "description": "Fetch web resource while using version-integrity rules",
   "main": "index.js",
   "bin": "command.js",
   "scripts": {
