@@ -1,6 +1,6 @@
 {
   "name": "got-integrity",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Fetch web resource while using version-integrity rules",
   "main": "index.js",
   "bin": "command.js",
