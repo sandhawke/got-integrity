@@ -77,3 +77,9 @@ $ got-integrity https://www.w3.org/People/Sandro/ping#version-integrity=sha256-W
 $ cat pong.txt
 pong
 ```
+
+
+
+[npm-image]: https://img.shields.io/npm/v/got-integrity.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/got-integrity
+
