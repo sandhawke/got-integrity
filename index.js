@@ -3,7 +3,7 @@ const got = require('got')
 const debug = require('debug')('got-integrity')
 
 const re1 = /version-integrity=/
-const re2 = /[/?&#:]version-integrity=((\w+)-([0-9a-zA-Z/+_-]+=*))/
+const re2 = /\bversion-integrity=((\w+)-([0-9a-zA-Z/+_-]+=*))/
 
 const myGot = async (url, options = {}) => {
   let algo = options.algorithm || 'sha256'
