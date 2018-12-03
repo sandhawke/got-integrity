@@ -1,3 +1,9 @@
+# got-integrity
+
+[![NPM version][npm-image]][npm-url]
+
+This is an implementation of [version-integrity](https://github.com/sandhawke/version-integrity) as a wrapper to the wonderful "[got](https://www.npmjs.com/package/got)" http client.  It include a command line interface, too.
+
 ## API
 
 Install:
@@ -50,7 +56,7 @@ $ got-integrity --check https://www.w3.org/People/Sandro/ping#version-integrity=
 integrity confirmed: https://www.w3.org/People/Sandro/ping#version-integrity=sha256-Wmoo_BYA6hQdezkSWCLB1R-xZqvlYo5_wfmamwL11Sw=
 ```
 
-And if we mangle the hash, it's caught
+And if we change the hash (or the contents of the file), it's caught:
 
 ```
 $ got-integrity --check https://www.w3.org/People/Sandro/ping#version-integrity=sha256-Wmo
@@ -71,16 +77,3 @@ $ got-integrity https://www.w3.org/People/Sandro/ping#version-integrity=sha256-W
 $ cat pong.txt
 pong
 ```
-
-### Issues
-
-Those whole project raises an architectural concern I've been puzzling
-over for a long time. Who am I to say that people can't put
-"version-integrity=" in their URLs with some other semantics?  If
-people start to do that, for some bizarre reason, then clients using
-this library wont be able to access those URLs. I think that's
-probably an acceptable risk, but it was be unpleasant.
-
-Alternatives are (1) give up on backward-compatable dereferenceable
-URLs (with a new URI scheme) or (2) make the URL's even longer and
-harder to read.  Neither of those seems warranted yet, at least.
