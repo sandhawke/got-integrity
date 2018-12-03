@@ -25,52 +25,62 @@ Differences from `got`:
 
 Install:
 
-```bash
+```
 $ npm install -g got-integrity
 ```
 
 Fetch a resources with no checking:
 
-```bash
+```
 $ got-integrity https://www.w3.org/People/Sandro/ping
 pong
 ```
 
-Tell us a URL to use for checking:
+Create a URL with embedded hash, so future calls can check integrity:
 
-```bash
+```
 $ got-integrity --check https://www.w3.org/People/Sandro/ping
 integrity suggested: https://www.w3.org/People/Sandro/ping#version-integrity=sha256-Wmoo_BYA6hQdezkSWCLB1R-xZqvlYo5_wfmamwL11Sw=
 ```
 
 Confirm integrity:
 
-```bash
+```
 $ got-integrity --check https://www.w3.org/People/Sandro/ping#version-integrity=sha256-Wmoo_BYA6hQdezkSWCLB1R-xZqvlYo5_wfmamwL11Sw=
 integrity confirmed: https://www.w3.org/People/Sandro/ping#version-integrity=sha256-Wmoo_BYA6hQdezkSWCLB1R-xZqvlYo5_wfmamwL11Sw=
+```
 
+And if we mangle the hash, it's caught
+
+```
 $ got-integrity --check https://www.w3.org/People/Sandro/ping#version-integrity=sha256-Wmo
 Error: Integrity hash violation for content fetched from https://www.w3.org/People/Sandro/ping#version-integrity=sha256-Wmo
 ```
 
 Fetch, while checking integrity (which is really the same as first example above, except I'm using a version-integrity URL)
 
-```bash
-$ got-integrity https://www.w3.org/People/Sandro/ping#version-integrity=sha256-Wmoo_BYA6hQdezkSWCLB1R-xZqvlYo5_wfmamwL11Sw= > ping.txt
-$ cat ping.txt
+```
+$ got-integrity https://www.w3.org/People/Sandro/ping#version-integrity=sha256-Wmoo_BYA6hQdezkSWCLB1R-xZqvlYo5_wfmamwL11Sw= 
+pong
+```
+
+And, of course, you can redirect to a file if you want:
+
+```
+$ got-integrity https://www.w3.org/People/Sandro/ping#version-integrity=sha256-Wmoo_BYA6hQdezkSWCLB1R-xZqvlYo5_wfmamwL11Sw= > pong.txt
+$ cat pong.txt
 pong
 ```
 
 ### Issues
 
-The one funky thing is architectural.  Who am I to say that people
-can't put "version-integrity=" in their URLs with some other
-semantics?  If people start to do that, for some bizarre reason, then
-clients using this library wont be able to access those URLs. I think
-that's probably an acceptable risk, probably.
+Those whole project raises an architectural concern I've been puzzling
+over for a long time. Who am I to say that people can't put
+"version-integrity=" in their URLs with some other semantics?  If
+people start to do that, for some bizarre reason, then clients using
+this library wont be able to access those URLs. I think that's
+probably an acceptable risk, but it was be unpleasant.
 
-The only workaround I've come up with, noodling over this for a very
-long time, is to give up dereferenceability, with a new URI scheme
-that includes both a hash and a URL.  Magnet: URIs might work.  That
-doesn't really seem worth it, but maybe we could support both.
-
+Alternatives are (1) give up on backward-compatable dereferenceable
+URLs (with a new URI scheme) or (2) make the URL's even longer and
+harder to read.  Neither of those seems warranted yet, at least.
